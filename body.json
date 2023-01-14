@@ -1,0 +1,19 @@
+{
+    "example1":{
+        "name": "Devan Ferrel",
+        "nim": "225150600111031",
+        "prodi": "Pendidikan Teknologi Informasi",
+        "uktLunas": true
+    },
+    "example2":{
+        "name": "Devan Ferrel",
+        "nim": "225150600111031",
+        "prodi": "Pendidikan Teknologi Informasi",
+        "uktLunas": true,
+        "krs": {
+            "Skripsi": 5
+        }
+    }
+    
+}
+
