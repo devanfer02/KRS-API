@@ -9,6 +9,7 @@
 #### To run this locally, please follow the following instructions : 
 
 ## Installing Package and Dependancy
+### make sure you run the command in the same folder as the downloaded project
 Command line for installing : 
 - npm init --y
 - npm install @hapi/hapi
