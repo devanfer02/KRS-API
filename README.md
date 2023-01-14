@@ -1,12 +1,12 @@
 ### Port : 5000
 ### Use nodemon instead of node in script start when developing locally
 
-## What is KRS API?
-#### KRS API is an Application Programming Interface that takes Indonesian Study Plan Card System as a reference.
-#### It has 2 Foldiers, Course foldier with each major course and Major foldier to keep data in an array.
-#### body.json is an example of the body request, you can use it as your reference to create and send api request in postman
-#### This project use Hapi framework because this project is also inspired from my dicoding submission
-#### To run this locally, please follow the following instructions : 
+## What is KRS API? 
+KRS API is an Application Programming Interface that takes Indonesian Study Plan Card System as a reference. <br/>
+It has 2 Foldiers, Course foldier with each major course and Major foldier to keep data in an array.<br/>
+body.json is an example of the body request, you can use it as your reference to create and send api request in postman <br/>
+This project use Hapi framework because this project is also inspired from my dicoding submission <br/>
+To run this locally, please follow the following instructions : 
 
 ## Installing Package and Dependancy
 ### make sure you run the command in the same folder as the downloaded project
