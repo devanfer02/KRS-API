@@ -2,7 +2,7 @@ const { nanoid } = require('nanoid')
 const { sumValues, indexCourse } = require('./function')
 const studentFilkom = require('./student')
 const Course = require('./course/Course')
-const Class = require('./major/Majors')
+const majors = require('./majors')
 
 const addStudentHandler = (request, h) => {
     const {
@@ -75,6 +75,7 @@ const addStudentHandler = (request, h) => {
     }
 
     const id = nanoid(16)
+    
     if (hasKrs) {
         const sksTotal = sumValues(krs)
         if (sksTotal < 1 || sksTotal > 24) {
@@ -93,7 +94,7 @@ const addStudentHandler = (request, h) => {
             totalSks: sksTotal,
             krs
         }
-        studentFilkom.push(mahasiswa)
+        
         const response = h.response({
             status: 'success',
             message: 'Krs berhasil divalidasi. Semangat!!!',
@@ -101,6 +102,9 @@ const addStudentHandler = (request, h) => {
                 mahasiswa
             }
         })
+
+        studentFilkom.push(mahasiswa)
+
         response.code(201)
         return response
     }
@@ -121,11 +125,7 @@ const addStudentHandler = (request, h) => {
                 mahasiswa
             }
         })
-        const prodi = parseInt(nim.substring(6, 7)) 
-        const indexProdi = prodi < 5 ? prodi - 2 : prodi - 3
-        Class[indexProdi].push(mahasiswa)
         studentFilkom.push(mahasiswa)
-        
         response.code(201)
         return response
     }
@@ -138,6 +138,66 @@ const addStudentHandler = (request, h) => {
     return response
 }
 
+const getAllStudentHandler = (request, h) => {
+    const { krs, prodi } = request.query
+    if (krs) {
+        const response = h.response({
+            status: 'success',
+            message: `List Mahasiswa FILKOM yang mengambil matkul ${krs}`,
+            data: {
+                students: studentFilkom.filter((student) => student.krs[krs]).map((student) => ({
+                    name: student.name,
+                    nim: student.nim,
+                    prodi: student.nim
+                }))
+            }
+        })
+        response.code(200)
+        return response
+    }
+    if (prodi) {
+        const indexProdi = majors.indexOf(prodi)
+        console.log(prodi)
+        if (indexProdi == -1) {
+            const response = h.response({
+                status: 'fail',
+                message: 'Gagal melakukan search. Masukkan prodi dengan case sensitive'
+            })
+            response.code(404)
+            return response
+        }
+        const codeProdi = indexProdi < 3 ? indexProdi + 2 : indexProdi + 3
+        const response = h.response({
+            status: 'success',
+            message: `List Mahasiswa FILKOM prodi ${prodi}`,
+            data: {
+                students: studentFilkom.filter((student) => student.nim.charAt(6) == codeProdi).map((student) => ({
+                    name: student.name,
+                    nim: student.nim,
+                    prodi: student.prodi
+                }))
+            }
+        })
+        response.code(200)
+        return response
+    }
+    const response = h.response({
+        status: 'success',
+        message: 'List Mahasiswa FILKOM ',
+        data: {
+            students: studentFilkom.map((student) => ({
+                name: student.name,
+                nim: student.nim,
+                prodi: student.prodi
+            }))
+        }
+    })
+
+    response.code(200)
+    return response
+}
+
 module.exports = {
-    addStudentHandler
+    addStudentHandler,
+    getAllStudentHandler
 }
