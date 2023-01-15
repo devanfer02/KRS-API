@@ -25,7 +25,7 @@ Command line for installing :
 - npx eslint --init
 
 ## Eslint Configuration 
-- Style Guid -> Standard Style
+- Style Guide -> Standard Style
 - Config file -> JSON
 - Framework -> None
 - Run code -> Node
