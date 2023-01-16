@@ -91,6 +91,7 @@ const addStudentHandler = (request, h) => {
     const createdAt = new Date().toISOString()
     const isMahasiswaLama = detectStudentYear(nim) != 1
     const maxSks = findMaxSks(ip) 
+    const totalSksKrs = sumValues(Course[indexCourse(nim)])
 
     if (isMahasiswaLama && !hasIp) {
         const response = h.response({
@@ -152,14 +153,25 @@ const addStudentHandler = (request, h) => {
         return response
     }
 
-    if (sumValues(Course[indexCourse(nim)]) > maxSks && (hasIp && isMahasiswaLama)) {
+    if (totalSksKrs > maxSks && (hasIp && isMahasiswaLama)) {
         const response = h.response({
             status: 'fail',
-            message: `Gagal melakukan validasi krs. Jumlah Sks dari Paket Krs yang diambil melebihi max sks: ${maxSks}\n
-            Segera lapor ke akademik terkait hal krs`
+            message: `Gagal melakukan validasi krs. Jumlah Sks dari Paket Krs yang diambil melebihi max sks: ${maxSks}.`,
+            notes: 'Lapor ke akademik terkait krs dan segera membuat krs yang baru'
         })
 
         response.code(404)
+        return response
+    }
+
+    if (totalSksKrs < 1 || totalSksKrs > 24) {
+        const response = h.response({
+            status: 'fail',
+            message: 'Gagal melakukan validasi krs. Jumlah Sks dari Krs tidak boleh kurang dari 1 atau lebih dari 24',
+            notes: 'Untuk mahasiswa semester 6 dan keatas, disarankan untuk membuat krs terlebih dahulu. '
+        })
+
+        response.code(400)
         return response
     }
 
@@ -168,7 +180,7 @@ const addStudentHandler = (request, h) => {
         name,
         nim,
         prodi,
-        totalSks: sumValues(Course[indexCourse(nim)]),
+        totalSks: totalSksKrs,
         krs: Course[indexCourse(nim)],
         createdAt
     }
