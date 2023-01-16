@@ -1,5 +1,5 @@
 const { nanoid } = require('nanoid')
-const { sumValues, indexCourse } = require('./function')
+const { sumValues, indexCourse, detectStudentYear, findMaxSks } = require('./function')
 const studentFilkom = require('./student')
 const Course = require('./course/Course')
 const majors = require('./majors')
@@ -10,6 +10,7 @@ const addStudentHandler = (request, h) => {
         nim,
         prodi,
         uktLunas,
+        ip,
         krs
     } = request.payload
 
@@ -20,6 +21,8 @@ const addStudentHandler = (request, h) => {
     const hasKrs = krs !== undefined
     const invalidKrs = typeof (krs) !== 'object'
     const nimExist = studentFilkom.find((student) => student.nim === nim)
+    const hasIp = ip !== undefined
+    const ipIsNumber = typeof (ip) === 'number'
 
     if (!uktLunas) {
         const response = h.response({
@@ -86,9 +89,37 @@ const addStudentHandler = (request, h) => {
 
     const id = nanoid(16)
     const createdAt = new Date().toISOString()
+    const isMahasiswaLama = detectStudentYear(nim) != 1
+    const maxSks = findMaxSks(ip) 
+
+    if (isMahasiswaLama && !hasIp) {
+        const response = h.response({
+            status: 'fail',
+            message: 'Gagal melakukan validasi krs. Mahasiswa lama wajib melampirkan ip'
+        })
+        response.code(404)
+        return response
+    }
+
+    if (isMahasiswaLama && !ipIsNumber) {
+        const response = h.response({
+            status: 'fail',
+            message: 'Gagal melakukan validasi krs. IP yang dilampirkan harus angka'
+        })
+        response.code(404)
+        return response
+    }
     
     if (hasKrs) {
         const sksTotal = sumValues(krs)
+        if (sksTotal > maxSks) {
+            const response = h.response({
+                status: 'fail',
+                message: `Gagal melakukan validasi Krs. Ip total melebihi max sks :${maxSks}`
+            })
+            response.code(400)
+            return response
+        }
         if (sksTotal < 1 || sksTotal > 24) {
             const response = h.response({
                 status: 'fail',
@@ -118,6 +149,17 @@ const addStudentHandler = (request, h) => {
         studentFilkom.push(mahasiswa)
 
         response.code(201)
+        return response
+    }
+
+    if (sumValues(Course[indexCourse(nim)]) > maxSks && (hasIp && isMahasiswaLama)) {
+        const response = h.response({
+            status: 'fail',
+            message: `Gagal melakukan validasi krs. Jumlah Sks dari Paket Krs yang diambil melebihi max sks: ${maxSks}\n
+            Segera lapor ke akademik terkait hal krs`
+        })
+
+        response.code(404)
         return response
     }
 
@@ -349,8 +391,8 @@ const editStudentDetailHandler = (request, h) => {
 const deleteStudentHandler = (request, h) => {
     const { studentId } = request.params
 
-    const indexStudent = studentFilkom.findIndex((student) => student.id === studentId)
-    if (indexStudent !== -1) {
+    const indexStudent = studentFilkom.find((student) => student.id === studentId)
+    if (indexStudent != -1) {
         studentFilkom.splice(indexStudent, 1)
         const response = h.response({
             status: 'success',
