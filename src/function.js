@@ -15,7 +15,24 @@ const indexCourse = (nim) => {
     }
 }
 
+const detectStudentYear = (nim) => {
+    const currentTime = new Date()
+    const currentYear = currentTime.getFullYear() % 2000
+    const nimYear = nim.substring(0, 2)
+    return currentYear - nimYear
+}
+
+const findMaxSks = (ip) => {
+    if (ip < 1.5) return 11
+    if (ip < 2) return 15
+    if (ip < 2.5) return 18
+    if (ip < 3) return 21
+    return 24
+}
+
 module.exports = {
     sumValues,
-    indexCourse
+    indexCourse,
+    detectStudentYear,
+    findMaxSks
 }
