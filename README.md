@@ -11,6 +11,9 @@ This project use Hapi framework because this project is also inspired from my di
 - localhost:5000/student
 - localhost:5000/student?krs=Mata Kuliah Tanpa Quote String
 - localhost:5000/student?prodi=Prodi Tanpa Quote String
+- localhost:5000/student?prodi=Prodi Tanpa Quote String&krs=Mata Kuliah Tanpa Quote String
+- localhost:5000/student/nim
+Lihat route untuk lebih detailnya 
 <br/>
 To run this locally, please follow the following instructions : 
 
