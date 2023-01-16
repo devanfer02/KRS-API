@@ -15,6 +15,17 @@
         "krs": {
             "Skripsi": 5
         }
+    },
+    "example3":
+    {
+        "name": "Devan Ferrel",
+        "nim": "225150600111031",
+        "prodi": "Pendidikan Teknologi Informasi",
+        "uktLunas": true,
+        "ip": 3.5,
+        "krs": {
+            "Skripsi": 5
+        }
     }
     
 }
