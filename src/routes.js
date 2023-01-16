@@ -1,6 +1,9 @@
 const {
     addStudentHandler,
-    getAllStudentHandler 
+    getAllStudentHandler,
+    getStudentByNimHandler,
+    editStudentDetailHandler,
+    deleteStudentHandler
 } = require('./handler')
 
 const routes = [
@@ -17,17 +20,17 @@ const routes = [
     {
         method: 'GET',
         path: '/student/{nim}',
-        handler: () => {}
+        handler: getStudentByNimHandler
     },
     {
         method: 'PUT',
         path: '/student/{studentId}',
-        handler: () => {}
+        handler: editStudentDetailHandler
     },
     {
         method: 'DELETE',
         path: '/student/{id}',
-        handler: () => {}
+        handler: deleteStudentHandler
     }
 ]
 
