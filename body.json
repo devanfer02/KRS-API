@@ -1,26 +1,27 @@
 {
     "example1":
     {
-        "name": "Devan Ferrel",
-        "nim": "225150600111031",
-        "prodi": "Pendidikan Teknologi Informasi",
+        "name": "dummy name1",
+        "nim": "22xxxxxxxxxxxxx",
+        "prodi": "Teknologi Informasi",
         "uktLunas": true
     },
     "example2":
     {
-        "name": "Devan Ferrel",
-        "nim": "225150600111031",
+        "name": "dummy name2",
+        "nim": "19xxxxxxxxxxxxx",
         "prodi": "Pendidikan Teknologi Informasi",
         "uktLunas": true,
+        "ip": 3.2,
         "krs": {
             "Skripsi": 5
         }
     },
     "example3":
     {
-        "name": "Devan Ferrel",
-        "nim": "225150600111031",
-        "prodi": "Pendidikan Teknologi Informasi",
+        "name": "dummy name3",
+        "nim": "20xxxxxxxxxxxx",
+        "prodi": "Teknik Informatika",
         "uktLunas": true,
         "ip": 3.5,
         "krs": {
