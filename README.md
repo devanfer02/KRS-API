@@ -21,6 +21,9 @@ To run this locally, please follow the following instructions :
 ## Installing Package and Dependancy
 ### make sure you run the command in the same folder as the downloaded project
 Command line for installing : 
+- npm install
+
+If the above command line doesn't install all dependencies, type the following command :
 - npm init --y
 - npm install @hapi/hapi
 - npm install nanoid@3.x.x
