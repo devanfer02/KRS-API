@@ -403,7 +403,7 @@ const editStudentDetailHandler = (request, h) => {
 const deleteStudentHandler = (request, h) => {
     const { studentId } = request.params
 
-    const indexStudent = studentFilkom.find((student) => student.id === studentId)
+    const indexStudent = studentFilkom.findIndex((student) => student.id === studentId)
     if (indexStudent != -1) {
         studentFilkom.splice(indexStudent, 1)
         const response = h.response({
