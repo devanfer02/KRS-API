@@ -4,7 +4,7 @@
 ## What is KRS API? 
 KRS API is an Application Programming Interface that takes Indonesian Study Plan Card System as a reference. <br/>
 It has Course foldier with each major course<br/>
-body.json is an example of the body request, you can use it as your reference to create and send api request in postman <br/>
+example.json is an example of the body request, you can use it as your reference to create and send api request in postman <br/>
 This project use Hapi framework because this project is also inspired from my dicoding submission <br/>
 
 ### Link and Queries : 
