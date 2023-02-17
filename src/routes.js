@@ -29,7 +29,7 @@ const routes = [
     },
     {
         method: 'DELETE',
-        path: '/student/{id}',
+        path: '/student/{studentId}',
         handler: deleteStudentHandler
     }
 ]
