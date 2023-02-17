@@ -314,12 +314,13 @@ const editStudentDetailHandler = (request, h) => {
     const { studentId } = request.params
 
     const indexStudent = studentFilkom.findIndex((student) => student.id === studentId)
+ 
     const {
         name,
         nim,
         prodi,
         krs
-    } = request.payload
+    } = request.payload 
 
     const idExist = studentFilkom.find((student) => student.id === studentId)
     const hasNoName = name === undefined
@@ -373,7 +374,7 @@ const editStudentDetailHandler = (request, h) => {
         response.code(400)
         return response
     }
-
+    
     if (hasKrs && invalidKrs) {
         const response = h.response({
             status: 'fail',
@@ -383,14 +384,23 @@ const editStudentDetailHandler = (request, h) => {
         return response
     }
 
-    studentFilkom[indexStudent] = {
-        ...studentFilkom[indexStudent],
-        name,
-        nim, 
-        prodi,
-        krs
+    if (hasKrs) {
+        studentFilkom[indexStudent] = {
+            ...studentFilkom[indexStudent],
+            name,
+            nim, 
+            prodi,
+            krs
+        }
+    } else {
+        studentFilkom[indexStudent] = {
+            ...studentFilkom[indexStudent],
+            name,
+            nim, 
+            prodi
+        }
     }
-
+    
     const response = h.response({
         status: 'success',
         message: 'Detail mahasiswa berhasil diperbarui'
@@ -403,7 +413,12 @@ const editStudentDetailHandler = (request, h) => {
 const deleteStudentHandler = (request, h) => {
     const { studentId } = request.params
 
+    console.log(studentFilkom)
+    console.log("ini student id : ")
+    console.log(studentId)
     const indexStudent = studentFilkom.findIndex((student) => student.id === studentId)
+
+    console.log(indexStudent)
     if (indexStudent != -1) {
         studentFilkom.splice(indexStudent, 1)
         const response = h.response({
