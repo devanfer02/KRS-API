@@ -1,16 +1,17 @@
- /* test on postman */
+ /* test on postman */ 
+ /* use your nim to test */ 
 {
     "example1":
     {
         "name": "dummy name1",
-        "nim": "22xxxxxxxxxxxxx",
+        "nim": "225150600111031",
         "prodi": "Teknologi Informasi",
         "uktLunas": true
     },
     "example2":
     {
         "name": "dummy name2",
-        "nim": "19xxxxxxxxxxxxx",
+        "nim": "225150600111031",
         "prodi": "Pendidikan Teknologi Informasi",
         "uktLunas": true,
         "ip": 3.2,
@@ -21,7 +22,7 @@
     "example3":
     {
         "name": "dummy name3",
-        "nim": "20xxxxxxxxxxxx",
+        "nim": "225150600111031",
         "prodi": "Teknik Informatika",
         "uktLunas": true,
         "ip": 3.5,
