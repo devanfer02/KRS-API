@@ -24,7 +24,7 @@ To run this locally, please follow the following instructions :
 Command line to run server : 
 - npm start
 
-Command line for installing : 
+Command line for installing all dependancies : 
 - npm install
 
 If the above command line doesn't install all dependencies, type the following command :
